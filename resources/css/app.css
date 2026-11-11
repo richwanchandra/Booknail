@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #FBF9F8;
+        color: #1C1B1B;
+    }
+    h1, h2, h3, h4, .font-serif {
+        font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#B76E79] text-white font-semibold shadow-soft hover:bg-[#a35460] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300;
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-[#DCD9D9] text-[#1C1B1B] font-semibold bg-white hover:bg-[#F6F3F2] transition-all duration-300;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[#49454F] font-semibold hover:bg-[#F6F3F2] hover:text-[#1C1B1B] transition-all duration-200;
+    }
+    .card {
+        @apply bg-white rounded-3xl shadow-soft border border-[#DCD9D9]/60 overflow-hidden hover:shadow-card hover:-translate-y-0.5 transition-all duration-300;
+    }
+    .chip {
+        @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200;
+    }
+    .chip-active {
+        @apply bg-[#B76E79] text-white shadow-soft;
+    }
+    .chip-inactive {
+        @apply bg-[#F6F3F2] text-[#49454F] border border-[#DCD9D9] hover:bg-white hover:text-[#1C1B1B];
+    }
+    .section-heading {
+        @apply text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1C1B1B] tracking-tight;
+    }
+    .section-subheading {
+        @apply mt-3 text-base sm:text-lg text-[#49454F] max-w-2xl mx-auto;
+    }
+    .eyebrow {
+        @apply inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F4D7D4]/60 text-[#B76E79] text-[11px] font-bold uppercase tracking-[0.18em];
+    }
+    .price-tag {
+        @apply inline-flex items-baseline gap-0.5 text-[#B76E79];
+    }
+    .price-tag > .currency {
+        @apply text-sm font-semibold;
+    }
+    .price-tag > .amount {
+        @apply text-2xl font-extrabold font-serif;
+    }
+}
+
+@layer utilities {
+    .bg-dots {
+        background-image: radial-gradient(circle, rgba(183, 110, 121, 0.15) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-[#B76E79] to-[#88414b];
+    }
+    .mask-fade-b {
+        -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    }
+}
