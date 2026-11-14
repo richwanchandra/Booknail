@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\WaGateway\FonnteDriver;
 use App\Services\WaGateway\MockDriver;
 use App\Services\WaGateway\WaGatewayInterface;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production (Railway reverse proxy)
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         \Illuminate\Support\Facades\Blade::prepareStringsForCompilationUsing(function ($string) {
             return preg_replace_callback('/<x-lucide-([a-z0-9-]+)\b(.*?)(\/>|>(.*?)<\/x-lucide-\1>)/s', function ($matches) {
                 $icon = $matches[1];

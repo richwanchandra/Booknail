@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => EnsureAdmin::class,
             'artist' => EnsureArtist::class,
         ]);
+
+        // Trust all proxies (Railway reverse proxy) so Laravel detects HTTPS correctly
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->report(function (\Throwable $e) {
