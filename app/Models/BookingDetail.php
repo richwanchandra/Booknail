@@ -7,11 +7,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAutoIncrementFallback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BookingDetail extends Model
 {
+    use HasAutoIncrementFallback;
     // Kolom yang diizinkan untuk mass assignment
     protected $fillable = [
         'booking_id',       // ID booking induk

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAutoIncrementFallback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
+    use HasAutoIncrementFallback;
     protected $fillable = [
         'booking_id',
         'customer_id',

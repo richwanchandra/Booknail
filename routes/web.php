@@ -111,6 +111,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
         Route::get('/reports/export/pdf', [ReportController::class, 'exportPdf'])->name('reports.exportPdf');
         Route::get('/reports/export/csv', [ReportController::class, 'exportCsv'])->name('reports.exportCsv');
+
+        // Helper maintenance route (Admin Only)
+        Route::get('/run-migrations', function () {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            return '<h3>Migrasi Selesai:</h3><pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+        })->name('runMigrations');
     });
 });
 

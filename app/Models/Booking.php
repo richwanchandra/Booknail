@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAutoIncrementFallback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
 {
+    use HasAutoIncrementFallback;
     // Kolom yang diizinkan untuk mass assignment
     protected $fillable = [
         'booking_code',               // Kode unik booking (format: BNyymmddXXX)
