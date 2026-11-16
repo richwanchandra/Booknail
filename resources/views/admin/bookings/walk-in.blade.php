@@ -50,14 +50,14 @@
         <div class="relative flex items-center justify-between max-w-3xl mx-auto">
             <!-- Connecting Progress Line -->
             <div class="absolute top-5 left-10 right-10 h-1 bg-gray-100 hidden sm:block -z-0">
-                <div class="h-full bg-gradient-to-r from-[#991b1b] to-[#B76E79] rounded-full transition-all duration-500"
+                <div class="h-full bg-gradient-to-r from-[#B76E79] to-[#B76E79] rounded-full transition-all duration-500"
                      :style="'width: ' + ((currentStep - 1) * 33.33) + '%'"></div>
             </div>
 
             <!-- Step 1: Pilih Layanan -->
             <div class="relative flex flex-col items-center gap-2 z-10 cursor-pointer" @click="goToStep(1)">
                 <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-sm transition-all duration-300"
-                     :class="currentStep >= 1 ? 'bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 ring-4 ring-[#991b1b]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
+                     :class="currentStep >= 1 ? 'bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 ring-4 ring-[#B76E79]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
                     <template x-if="currentStep > 1">
                         <x-lucide-check class="w-4 h-4 stroke-[3]" />
                     </template>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="text-center">
                     <div class="text-xs sm:text-sm font-bold transition-colors"
-                         :class="currentStep >= 1 ? 'text-[#991b1b]' : 'text-gray-400'">Pilih Layanan</div>
+                         :class="currentStep >= 1 ? 'text-[#B76E79]' : 'text-gray-400'">Pilih Layanan</div>
                     <div class="text-[10px] text-gray-400">Step 1</div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             <!-- Step 2: Jadwal -->
             <div class="relative flex flex-col items-center gap-2 z-10 cursor-pointer" @click="goToStep(2)">
                 <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-sm transition-all duration-300"
-                     :class="currentStep >= 2 ? 'bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 ring-4 ring-[#991b1b]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
+                     :class="currentStep >= 2 ? 'bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 ring-4 ring-[#B76E79]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
                     <template x-if="currentStep > 2">
                         <x-lucide-check class="w-4 h-4 stroke-[3]" />
                     </template>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="text-center">
                     <div class="text-xs sm:text-sm font-bold transition-colors"
-                         :class="currentStep >= 2 ? 'text-[#991b1b]' : 'text-gray-400'">Jadwal</div>
+                         :class="currentStep >= 2 ? 'text-[#B76E79]' : 'text-gray-400'">Jadwal</div>
                     <div class="text-[10px] text-gray-400">Step 2</div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
             <!-- Step 3: Desain -->
             <div class="relative flex flex-col items-center gap-2 z-10 cursor-pointer" @click="goToStep(3)">
                 <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-sm transition-all duration-300"
-                     :class="currentStep >= 3 ? 'bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 ring-4 ring-[#991b1b]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
+                     :class="currentStep >= 3 ? 'bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 ring-4 ring-[#B76E79]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
                     <template x-if="currentStep > 3">
                         <x-lucide-check class="w-4 h-4 stroke-[3]" />
                     </template>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="text-center">
                     <div class="text-xs sm:text-sm font-bold transition-colors"
-                         :class="currentStep >= 3 ? 'text-[#991b1b]' : 'text-gray-400'">Desain</div>
+                         :class="currentStep >= 3 ? 'text-[#B76E79]' : 'text-gray-400'">Desain</div>
                     <div class="text-[10px] text-gray-400">Step 3</div>
                 </div>
             </div>
@@ -111,12 +111,12 @@
             <!-- Step 4: Pembayaran -->
             <div class="relative flex flex-col items-center gap-2 z-10 cursor-pointer" @click="goToStep(4)">
                 <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-sm transition-all duration-300"
-                     :class="currentStep >= 4 ? 'bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 ring-4 ring-[#991b1b]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
+                     :class="currentStep >= 4 ? 'bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 ring-4 ring-[#B76E79]/15' : 'bg-gray-100 text-gray-400 border border-gray-200'">
                     <span>4</span>
                 </div>
                 <div class="text-center">
                     <div class="text-xs sm:text-sm font-bold transition-colors"
-                         :class="currentStep >= 4 ? 'text-[#991b1b]' : 'text-gray-400'">Pembayaran</div>
+                         :class="currentStep >= 4 ? 'text-[#B76E79]' : 'text-gray-400'">Pembayaran</div>
                     <div class="text-[10px] text-gray-400">Step 4</div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
         <!-- Reset Flow Booking -->
         <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center">
             <button type="button" @click="resetFlow()"
-                    class="text-xs font-bold text-gray-500 hover:text-[#991b1b] transition inline-flex items-center gap-1.5 cursor-pointer">
+                    class="text-xs font-bold text-gray-500 hover:text-[#B76E79] transition inline-flex items-center gap-1.5 cursor-pointer">
                 <x-lucide-rotate-ccw class="w-3.5 h-3.5" />
                 <span>Reset Flow Booking</span>
             </button>
@@ -349,10 +349,10 @@
                     <!-- Step 1 Navigation Button -->
                     <div class="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between">
                         <div class="text-xs text-gray-500">
-                            Total Durasi: <strong class="text-gray-900" x-text="totalDuration + ' Menit'"></strong> · Total: <strong class="text-[#991b1b]" x-text="formattedTotalPrice"></strong>
+                            Total Durasi: <strong class="text-gray-900" x-text="totalDuration + ' Menit'"></strong> · Total: <strong class="text-[#B76E79]" x-text="formattedTotalPrice"></strong>
                         </div>
                         <button type="button" @click="goToStep(2)"
-                                class="px-6 py-3 rounded-full bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-xs shadow-md shadow-[#991b1b]/20 transition flex items-center gap-2 cursor-pointer">
+                                class="px-6 py-3 rounded-full bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-xs shadow-md shadow-[#B76E79]/20 transition flex items-center gap-2 cursor-pointer">
                             <span>Lanjut ke Jadwal (Step 2)</span>
                             <x-lucide-arrow-right class="w-4 h-4" />
                         </button>
@@ -371,20 +371,20 @@
                     {{-- Operating Hours & Dynamic Duration Banner --}}
                     <div class="mb-5 p-4 rounded-2xl bg-[#FAF8F7] border border-[#DCD9D9]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                         <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-[#991b1b]/10 text-[#991b1b] flex items-center justify-center shrink-0">
-                                <x-lucide-clock class="w-5 h-5 text-[#991b1b]" />
+                            <div class="w-9 h-9 rounded-xl bg-[#B76E79]/10 text-[#B76E79] flex items-center justify-center shrink-0">
+                                <x-lucide-clock class="w-5 h-5 text-[#B76E79]" />
                             </div>
                             <div>
                                 <div class="font-bold text-[#1C1B1B]">Jam Operasional Studio: 11:00 – 19:00 WIB</div>
                                 <div class="text-[11px] text-[#49454F] mt-0.5">
                                     Slot jam dihitung otomatis berdasarkan total durasi layanan:
-                                    <strong class="text-[#991b1b]" x-text="totalDuration + ' menit (' + formattedDurationLabel + ')'"></strong>.
+                                    <strong class="text-[#B76E79]" x-text="totalDuration + ' menit (' + formattedDurationLabel + ')'"></strong>.
                                 </div>
                             </div>
                         </div>
 
                         {{-- Quick Action: Set Jam Sekarang --}}
-                        <button type="button" @click="setNowTime()" class="text-xs font-bold text-[#991b1b] bg-[#991b1b]/10 hover:bg-[#991b1b]/20 px-3.5 py-2 rounded-full flex items-center gap-1.5 transition shrink-0 cursor-pointer">
+                        <button type="button" @click="setNowTime()" class="text-xs font-bold text-[#B76E79] bg-[#B76E79]/10 hover:bg-[#B76E79]/20 px-3.5 py-2 rounded-full flex items-center gap-1.5 transition shrink-0 cursor-pointer">
                             <x-lucide-zap class="w-3.5 h-3.5" />
                             <span>Set Jam Sekarang</span>
                         </button>
@@ -393,7 +393,7 @@
                     {{-- HEADER KELOLA TERAPIS & SLOT (Mirrors Customer Reference) --}}
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100 mb-6">
                         <div class="flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-2xl bg-[#991b1b] flex items-center justify-center text-white shadow-md shadow-[#991b1b]/20 shrink-0">
+                            <div class="w-11 h-11 rounded-2xl bg-[#B76E79] flex items-center justify-center text-white shadow-md shadow-[#B76E79]/20 shrink-0">
                                 <x-lucide-calendar class="w-5 h-5 text-white" />
                             </div>
                             <div>
@@ -413,7 +413,7 @@
                                 <div class="flex gap-2.5 min-w-max">
                                     @foreach($dateOptions as $d)
                                         <a href="{{ route('admin.walk-in.create', ['date' => $d['date']]) }}"
-                                           class="flex flex-col items-center justify-center w-[66px] h-[72px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none {{ $d['active'] ? 'bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 scale-105 ring-2 ring-[#991b1b]/20 font-bold' : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200/90 hover:border-gray-300' }}">
+                                           class="flex flex-col items-center justify-center w-[66px] h-[72px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none {{ $d['active'] ? 'bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 scale-105 ring-2 ring-[#B76E79]/20 font-bold' : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200/90 hover:border-gray-300' }}">
                                             <span class="text-[10px] font-bold uppercase tracking-wider {{ $d['active'] ? 'text-white/80' : 'text-gray-400' }}">{{ $d['dayLabel'] }}</span>
                                             <span class="text-xl font-extrabold leading-none my-1">{{ $d['dayNumber'] }}</span>
                                             <span class="text-[10px] font-semibold {{ $d['active'] ? 'text-white/70' : 'text-gray-400' }}">{{ $d['monthLabel'] }}</span>
@@ -426,10 +426,10 @@
                             <div class="relative shrink-0 group" title="Pilih tanggal manual">
                                 <input type="date"
                                        value="{{ $defaultDate }}"
-                                       class="w-11 h-11 rounded-2xl border border-gray-200 bg-white text-transparent cursor-pointer hover:border-[#991b1b]/40 transition opacity-0 absolute inset-0 z-10"
+                                       class="w-11 h-11 rounded-2xl border border-gray-200 bg-white text-transparent cursor-pointer hover:border-[#B76E79]/40 transition opacity-0 absolute inset-0 z-10"
                                        onchange="window.location.href='{{ route('admin.walk-in.create') }}?date=' + this.value">
-                                <div class="w-11 h-11 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-500 group-hover:text-[#991b1b] group-hover:border-[#991b1b]/40 shadow-sm transition">
-                                    <x-lucide-sparkles class="w-4 h-4 text-[#991b1b]" />
+                                <div class="w-11 h-11 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-500 group-hover:text-[#B76E79] group-hover:border-[#B76E79]/40 shadow-sm transition">
+                                    <x-lucide-sparkles class="w-4 h-4 text-[#B76E79]" />
                                 </div>
                             </div>
                         </div>
@@ -459,7 +459,7 @@
                             @endphp
                             <div class="rounded-3xl border transition-all duration-300 bg-white overflow-hidden shadow-sm"
                                  :class="{
-                                     'ring-2 ring-[#991b1b] border-[#991b1b] shadow-md': selectedArtistId === {{ $art->id }},
+                                     'ring-2 ring-[#B76E79] border-[#B76E79] shadow-md': selectedArtistId === {{ $art->id }},
                                      'border-gray-200/90 hover:border-gray-300': selectedArtistId !== {{ $art->id }}
                                  }">
 
@@ -475,13 +475,13 @@
                                                          alt="{{ optional($art->user)->name ?? 'Terapis' }}"
                                                          class="w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-2xl object-cover ring-2 ring-white shadow-sm">
                                                 @else
-                                                    <div class="w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-2xl bg-[#991b1b] flex items-center justify-center text-white font-serif font-extrabold text-2xl ring-2 ring-white shadow-sm">
+                                                    <div class="w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-2xl bg-[#B76E79] flex items-center justify-center text-white font-serif font-extrabold text-2xl ring-2 ring-white shadow-sm">
                                                         {{ $art->initials }}
                                                     </div>
                                                 @endif
 
                                                 <div x-show="selectedArtistId === {{ $art->id }}" x-cloak
-                                                     class="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#991b1b] text-white flex items-center justify-center shadow-md ring-2 ring-white">
+                                                     class="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#B76E79] text-white flex items-center justify-center shadow-md ring-2 ring-white">
                                                     <x-lucide-check class="w-3.5 h-3.5 stroke-[3]" />
                                                 </div>
                                             </div>
@@ -497,7 +497,7 @@
                                                 {{-- Status Ringkasan & Accordion Button (Mirrors Customer Reference) --}}
                                                 <div class="mt-2.5 flex flex-wrap items-center gap-2">
                                                     <button type="button" @click.stop="toggleAccordion({{ $art->id }})"
-                                                            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#991b1b] text-white shadow-sm shadow-[#991b1b]/20 hover:bg-[#7f1d1d] transition cursor-pointer">
+                                                            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#B76E79] text-white shadow-sm shadow-[#B76E79]/20 hover:bg-[#a35460] transition cursor-pointer">
                                                         <x-lucide-calendar class="w-3.5 h-3.5" />
                                                         <span x-text="getArtistSummaryText({{ $art->id }}, '{{ $summary['text'] }}')"></span>
                                                         <span class="inline-flex transition-transform duration-200" :class="expandedArtistId === {{ $art->id }} ? 'rotate-180' : ''">
@@ -506,7 +506,7 @@
                                                     </button>
 
                                                     <span x-show="selectedArtistId === {{ $art->id }}" x-cloak
-                                                          class="text-[11px] font-extrabold text-[#991b1b] bg-[#991b1b]/10 px-2.5 py-1 rounded-lg">
+                                                          class="text-[11px] font-extrabold text-[#B76E79] bg-[#B76E79]/10 px-2.5 py-1 rounded-lg">
                                                         Terapis Terpilih
                                                     </span>
                                                 </div>
@@ -535,7 +535,7 @@
 
                                                 <button type="button"
                                                         @click="openAddSlotModal({{ $art->id }}, '{{ addslashes(optional($art->user)->name ?? 'Terapis') }}')"
-                                                        class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#991b1b] hover:bg-[#7f1d1d] text-white shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+                                                        class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#B76E79] hover:bg-[#a35460] text-white shadow-sm transition flex items-center gap-1.5 cursor-pointer"
                                                         title="Tambah slot waktu baru untuk terapis ini">
                                                     <x-lucide-plus-circle class="w-3.5 h-3.5" />
                                                     <span>Tambah Slot Jam baru</span>
@@ -563,8 +563,8 @@
                                         <template x-for="(slot, idx) in (slotsData[{{ $art->id }}] || [])" :key="slot.id || idx">
                                             <div class="rounded-2xl border-2 p-3.5 sm:p-4 transition-all duration-200 select-none relative group bg-white shadow-sm flex flex-col justify-between"
                                                  :class="{
-                                                     'border-[#991b1b] bg-[#991b1b]/5 shadow-md shadow-[#991b1b]/10 scale-[1.02] ring-2 ring-[#991b1b]/20': (selectedArtistId === {{ $art->id }} && selectedSlot === slot.value),
-                                                     'border-gray-200 hover:border-[#991b1b]/50': (selectedArtistId !== {{ $art->id }} || selectedSlot !== slot.value) && slot.status === 'available',
+                                                     'border-[#B76E79] bg-[#B76E79]/5 shadow-md shadow-[#B76E79]/10 scale-[1.02] ring-2 ring-[#B76E79]/20': (selectedArtistId === {{ $art->id }} && selectedSlot === slot.value),
+                                                     'border-gray-200 hover:border-[#B76E79]/50': (selectedArtistId !== {{ $art->id }} || selectedSlot !== slot.value) && slot.status === 'available',
                                                      'border-rose-200 bg-rose-50/40': slot.status === 'booked',
                                                      'border-gray-200 bg-gray-50/80 opacity-75': slot.status === 'inactive'
                                                  }">
@@ -573,7 +573,7 @@
                                                 <div class="flex items-center justify-between gap-2 mb-1.5 cursor-pointer"
                                                      @click="slot.status === 'available' ? selectSlot({{ $art->id }}, '{{ addslashes(optional($art->user)->name ?? 'Terapis') }}', slot.value, slot.end_time) : null">
                                                     <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all shrink-0"
-                                                         :class="(selectedArtistId === {{ $art->id }} && selectedSlot === slot.value) ? 'border-[#991b1b] bg-[#991b1b]' : 'border-gray-300 bg-white'">
+                                                         :class="(selectedArtistId === {{ $art->id }} && selectedSlot === slot.value) ? 'border-[#B76E79] bg-[#B76E79]' : 'border-gray-300 bg-white'">
                                                         <svg class="w-2.5 h-2.5 text-white transition"
                                                              :class="(selectedArtistId === {{ $art->id }} && selectedSlot === slot.value) ? 'opacity-100' : 'opacity-0'"
                                                              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -605,8 +605,8 @@
 
                                                 {{-- Time Range (11:00 - 12:30) --}}
                                                 <div class="cursor-pointer mt-1" @click="slot.status === 'available' ? selectSlot({{ $art->id }}, '{{ addslashes(optional($art->user)->name ?? 'Terapis') }}', slot.value, slot.end_time) : null">
-                                                    <div class="font-extrabold text-sm sm:text-base leading-tight transition-colors text-gray-900 group-hover:text-[#991b1b]"
-                                                         :class="(selectedArtistId === {{ $art->id }} && selectedSlot === slot.value) ? 'text-[#991b1b]' : ''"
+                                                    <div class="font-extrabold text-sm sm:text-base leading-tight transition-colors text-gray-900 group-hover:text-[#B76E79]"
+                                                         :class="(selectedArtistId === {{ $art->id }} && selectedSlot === slot.value) ? 'text-[#B76E79]' : ''"
                                                          x-text="slot.display">
                                                     </div>
                                                 </div>
@@ -616,10 +616,10 @@
                                                     <div class="flex-1">
                                                         <template x-if="editingPriceSlotId !== slot.id">
                                                             <div @click.stop="startEditPrice(slot)"
-                                                                 class="cursor-pointer text-xs sm:text-sm font-bold text-[#991b1b] flex items-center gap-1 group/price"
+                                                                 class="cursor-pointer text-xs sm:text-sm font-bold text-[#B76E79] flex items-center gap-1 group/price"
                                                                  title="Klik untuk ubah harga slot langsung">
                                                                 <span x-text="slot.formatted_price"></span>
-                                                                <x-lucide-pencil class="w-3 h-3 text-gray-300 group-hover/price:text-[#991b1b] transition shrink-0" />
+                                                                <x-lucide-pencil class="w-3 h-3 text-gray-300 group-hover/price:text-[#B76E79] transition shrink-0" />
                                                             </div>
                                                         </template>
 
@@ -629,8 +629,8 @@
                                                                        x-model="tempPriceInput"
                                                                        @keydown.enter="savePrice(slot)"
                                                                        @keydown.escape="cancelEditPrice()"
-                                                                       class="w-24 px-2 py-0.5 text-xs rounded border border-[#991b1b] font-mono focus:outline-none">
-                                                                <button type="button" @click="savePrice(slot)" class="p-1 rounded bg-[#991b1b] text-white hover:bg-[#7f1d1d] cursor-pointer" title="Simpan Harga">
+                                                                       class="w-24 px-2 py-0.5 text-xs rounded border border-[#B76E79] font-mono focus:outline-none">
+                                                                <button type="button" @click="savePrice(slot)" class="p-1 rounded bg-[#B76E79] text-white hover:bg-[#a35460] cursor-pointer" title="Simpan Harga">
                                                                     <x-lucide-check class="w-3 h-3" />
                                                                 </button>
                                                                 <button type="button" @click="cancelEditPrice()" class="p-1 rounded bg-gray-200 text-gray-600 hover:bg-gray-300 cursor-pointer" title="Batal">
@@ -695,7 +695,7 @@
                             <span>Kembali ke Pilih Layanan</span>
                         </button>
                         <button type="button" @click="goToStep(3)"
-                                class="px-6 py-3 rounded-full bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-xs shadow-md shadow-[#991b1b]/20 transition flex items-center gap-2 cursor-pointer">
+                                class="px-6 py-3 rounded-full bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-xs shadow-md shadow-[#B76E79]/20 transition flex items-center gap-2 cursor-pointer">
                             <span>Lanjut ke Desain (Step 3)</span>
                             <x-lucide-arrow-right class="w-4 h-4" />
                         </button>
@@ -712,7 +712,7 @@
 
                 <div class="bg-white rounded-3xl p-6 md:p-8 border border-[#DCD9D9]/80 shadow-soft">
                     <div class="flex items-center gap-2.5 mb-5 pb-4 border-b border-gray-100">
-                        <div class="w-10 h-10 rounded-2xl bg-[#991b1b] flex items-center justify-center text-white shadow-md shadow-[#991b1b]/20 shrink-0">
+                        <div class="w-10 h-10 rounded-2xl bg-[#B76E79] flex items-center justify-center text-white shadow-md shadow-[#B76E79]/20 shrink-0">
                             <x-lucide-palette class="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -728,15 +728,15 @@
                                 Foto Referensi Desain Tamu <span class="text-xs font-normal text-gray-400">(Opsional, format JPG/PNG maks 5MB)</span>
                             </label>
 
-                            <div class="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center hover:border-[#991b1b]/50 transition bg-[#FBF9F8] relative">
+                            <div class="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center hover:border-[#B76E79]/50 transition bg-[#FBF9F8] relative">
                                 <template x-if="!photoPreview">
                                     <div class="space-y-2">
-                                        <div class="w-12 h-12 rounded-2xl bg-white border border-gray-200 text-[#991b1b] flex items-center justify-center mx-auto shadow-sm">
+                                        <div class="w-12 h-12 rounded-2xl bg-white border border-gray-200 text-[#B76E79] flex items-center justify-center mx-auto shadow-sm">
                                             <x-lucide-image-plus class="w-6 h-6" />
                                         </div>
                                         <div class="text-xs font-bold text-gray-700">Pilih atau Seret Foto Referensi ke Sini</div>
                                         <div class="text-[11px] text-gray-400">Teknisi / Artist dapat melihat referensi motif kuku yang diinginkan tamu</div>
-                                        <label class="mt-2 inline-block px-4 py-2 rounded-xl bg-[#991b1b] text-white font-bold text-xs shadow-sm hover:bg-[#7f1d1d] cursor-pointer transition">
+                                        <label class="mt-2 inline-block px-4 py-2 rounded-xl bg-[#B76E79] text-white font-bold text-xs shadow-sm hover:bg-[#a35460] cursor-pointer transition">
                                             <span>Unggah Foto Desain</span>
                                             <input type="file" name="custom_design_photo" accept="image/*" class="hidden" @change="onPhotoSelected($event)">
                                         </label>
@@ -745,7 +745,7 @@
 
                                 <template x-if="photoPreview">
                                     <div class="relative inline-block">
-                                        <img :src="photoPreview" class="w-48 h-48 rounded-2xl object-cover border-2 border-[#991b1b] shadow-md mx-auto">
+                                        <img :src="photoPreview" class="w-48 h-48 rounded-2xl object-cover border-2 border-[#B76E79] shadow-md mx-auto">
                                         <button type="button" @click="removePhoto()"
                                                 class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-lg hover:bg-rose-700 transition cursor-pointer"
                                                 title="Hapus foto">
@@ -774,7 +774,7 @@
                             <div class="mt-2.5 flex flex-wrap gap-1.5">
                                 @foreach(['Nude Ombre', 'French Tip Minimalis', 'Glitter Accent', 'Cat Eye Magnet', 'Chrome Powder', 'Kuku Almond', 'Kuku Oval', 'Kuku Square'] as $tag)
                                     <button type="button" @click="appendDesignTag('{{ $tag }}')"
-                                            class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-[#F4D7D4]/40 hover:text-[#991b1b] text-[11px] font-semibold text-gray-600 transition cursor-pointer">
+                                            class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-[#F4D7D4]/40 hover:text-[#B76E79] text-[11px] font-semibold text-gray-600 transition cursor-pointer">
                                         + {{ $tag }}
                                     </button>
                                 @endforeach
@@ -790,7 +790,7 @@
                             <span>Kembali ke Jadwal</span>
                         </button>
                         <button type="button" @click="goToStep(4)"
-                                class="px-6 py-3 rounded-full bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-xs shadow-md shadow-[#991b1b]/20 transition flex items-center gap-2 cursor-pointer">
+                                class="px-6 py-3 rounded-full bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-xs shadow-md shadow-[#B76E79]/20 transition flex items-center gap-2 cursor-pointer">
                             <span>Lanjut ke Pembayaran Kasir (Step 4)</span>
                             <x-lucide-arrow-right class="w-4 h-4" />
                         </button>
@@ -901,7 +901,7 @@
                                 <span>Kembali ke Desain</span>
                             </button>
                             <button type="submit"
-                                    class="px-8 py-3.5 rounded-full bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-sm shadow-lg shadow-[#991b1b]/30 transition flex items-center gap-2 cursor-pointer">
+                                    class="px-8 py-3.5 rounded-full bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-sm shadow-lg shadow-[#B76E79]/30 transition flex items-center gap-2 cursor-pointer">
                                 <x-icon name="lock" class="w-4 h-4" />
                                 <span>Simpan & Kunci Pesanan Walk-In</span>
                             </button>
@@ -1015,7 +1015,7 @@
 
                 <template x-if="currentStep === 4">
                     <button type="submit"
-                            class="w-full py-3.5 px-6 rounded-full bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-xs shadow-soft transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            class="w-full py-3.5 px-6 rounded-full bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-xs shadow-soft transition-all flex items-center justify-center gap-2 cursor-pointer">
                         <x-icon name="lock" class="w-4 h-4" />
                         <span>Simpan & Kunci Jadwal Walk-In</span>
                     </button>
@@ -1053,7 +1053,7 @@
              @click.outside="isAddModalOpen = false">
             <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-[#991b1b]/10 text-[#991b1b] flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-xl bg-[#B76E79]/10 text-[#B76E79] flex items-center justify-center">
                         <x-lucide-plus-circle class="w-4 h-4" />
                     </div>
                     <h3 class="font-serif font-bold text-base text-gray-900">Tambah Slot Jam Baru</h3>
@@ -1071,24 +1071,24 @@
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block font-bold text-gray-700 mb-1">Jam Mulai <span class="text-[#991b1b]">*</span></label>
-                        <input type="time" x-model="newSlotStartTime" min="11:00" max="19:00" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#991b1b] focus:outline-none">
+                        <label class="block font-bold text-gray-700 mb-1">Jam Mulai <span class="text-[#B76E79]">*</span></label>
+                        <input type="time" x-model="newSlotStartTime" min="11:00" max="19:00" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#B76E79] focus:outline-none">
                     </div>
                     <div>
-                        <label class="block font-bold text-gray-700 mb-1">Jam Selesai <span class="text-[#991b1b]">*</span></label>
-                        <input type="time" x-model="newSlotEndTime" min="11:00" max="19:00" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#991b1b] focus:outline-none">
+                        <label class="block font-bold text-gray-700 mb-1">Jam Selesai <span class="text-[#B76E79]">*</span></label>
+                        <input type="time" x-model="newSlotEndTime" min="11:00" max="19:00" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#B76E79] focus:outline-none">
                     </div>
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Tarif Slot (Rp)</label>
-                    <input type="number" x-model="newSlotPrice" placeholder="220000" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#991b1b] focus:outline-none">
+                    <input type="number" x-model="newSlotPrice" placeholder="220000" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm font-mono focus:border-[#B76E79] focus:outline-none">
                 </div>
             </div>
 
             <div class="mt-6 flex justify-end gap-2.5">
                 <button type="button" @click="isAddModalOpen = false" class="px-4 py-2 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 font-bold text-xs cursor-pointer">Batal</button>
-                <button type="button" @click="submitAddSlot()" class="px-4 py-2 rounded-xl bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-bold text-xs shadow-sm cursor-pointer">Simpan Slot Baru</button>
+                <button type="button" @click="submitAddSlot()" class="px-4 py-2 rounded-xl bg-[#B76E79] hover:bg-[#a35460] text-white font-bold text-xs shadow-sm cursor-pointer">Simpan Slot Baru</button>
             </div>
         </div>
     </div>
