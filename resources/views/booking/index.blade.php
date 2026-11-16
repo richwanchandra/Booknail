@@ -64,19 +64,19 @@
             <div class="px-4 sm:px-8 py-6 border-b border-gray-100">
                 <div class="relative flex items-center justify-between max-w-3xl mx-auto">
                     <div class="absolute top-5 left-0 right-0 h-1 bg-gray-100 hidden sm:block">
-                        <div class="h-full gradient-brand rounded-full transition-all duration-500" style="width: {{ $currentStep * 25 }}%"></div>
+                        <div class="h-full bg-[#B76E79] rounded-full transition-all duration-500" style="width: {{ $currentStep * 25 }}%"></div>
                     </div>
                     @foreach(['1' => ['Pilih Layanan', 'palette'], '2' => ['Jadwal', 'calendar'], '3' => ['Desain', 'camera'], '4' => ['Pembayaran', 'credit-card']] as $n => [$label, $icon])
                         <div class="relative flex flex-col items-center gap-2 z-10 w-1/4">
                             <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-base
-                                @if((int)$n <= $currentStep) gradient-brand text-white shadow-glow
-                                @else bg-gray-100 text-gray-400 @endif">
-                                <span class="sm:hidden flex items-center justify-center"><x-icon name="{{ $icon }}" class="w-4 h-4" /></span>
+                                @if((int)$n <= $currentStep) bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30
+                                @else bg-[#F6F3F2] text-[#79747E] border border-[#DCD9D9] @endif">
+                                <span class="sm:hidden flex items-center justify-center"><x-icon name="{{ $icon }}" class="w-4 h-4 {{ (int)$n <= $currentStep ? 'text-white' : 'text-[#79747E]' }}" /></span>
                                 <span class="hidden sm:block">{{ $n }}</span>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs sm:text-sm font-bold @if((int)$n <= $currentStep) text-brand-700 @else text-gray-400 @endif">{{ $label }}</div>
-                                <div class="text-[10px] sm:text-xs text-gray-400">Step {{ $n }}</div>
+                                <div class="text-xs sm:text-sm font-bold @if((int)$n <= $currentStep) text-[#B76E79] @else text-[#79747E] @endif">{{ $label }}</div>
+                                <div class="text-[10px] sm:text-xs text-[#79747E]">Step {{ $n }}</div>
                             </div>
                         </div>
                     @endforeach
@@ -87,7 +87,7 @@
             <div class="mt-4 flex justify-center">
                 <form action="{{ route('booking.reset') }}" method="POST">
                     @csrf
-                    <button type="submit" class="text-xs font-bold text-gray-500 hover:text-red-600 transition inline-flex items-center gap-1.5">
+                    <button type="submit" class="text-xs font-bold text-[#79747E] hover:text-[#B76E79] transition inline-flex items-center gap-1.5 cursor-pointer">
                         <x-lucide-rotate-ccw class="w-3.5 h-3.5" />
                         <span>Reset Flow Booking</span>
                     </button>

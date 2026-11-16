@@ -62,7 +62,8 @@
 @endphp
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     STEP 2 – Pilih Slot Jadwal & Terapis (All Artists View)
+     STEP 2 – Pilih Slot Jadwal & Terapis (All Artists View - Responsive Mobile)
+     Color Palette: Booknail Signature Dusty Rose (#B76E79 & #F4D7D4)
      ═══════════════════════════════════════════════════════════════════════ --}}
 <div x-data="{
     selectedArtistId: {{ !empty($step1['artist_id']) ? $step1['artist_id'] : 'null' }},
@@ -78,62 +79,69 @@
         this.selectedArtistName = artistName;
         this.selectedSlot = time;
     }
-}" class="space-y-6">
+}" class="space-y-5">
 
     {{-- ───────────────────────────── HEADER ───────────────────────────── --}}
-    <div class="card !p-0 !shadow-none !border-0 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="bg-white rounded-3xl border border-[#DCD9D9]/80 overflow-hidden shadow-soft">
 
-        {{-- Title --}}
-        <div class="px-5 pt-5 pb-3 flex items-center justify-between">
+        {{-- Title & Duration Info --}}
+        <div class="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-[#991b1b] flex items-center justify-center text-white shadow-md shadow-[#991b1b]/20">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#B76E79] flex items-center justify-center text-white shadow-md shadow-[#B76E79]/25 shrink-0">
                     <x-lucide-calendar class="w-5 h-5 text-white" />
                 </div>
                 <div>
-                    <h2 class="font-serif text-xl sm:text-2xl font-extrabold text-gray-900 leading-tight">Pilih Terapis & Slot Jadwal</h2>
-                    <p class="text-xs text-gray-500 mt-0.5">
-                        Estimasi durasi: <strong class="text-gray-800">{{ intdiv($duration, 60) ? intdiv($duration, 60) . 'j ' : '' }}{{ $duration % 60 }}m</strong> ·
-                        Tanggal: <strong class="text-gray-800">{{ Carbon::parse($bookingDate)->locale('id')->isoFormat('D MMMM Y') }}</strong>
+                    <h2 class="font-serif text-lg sm:text-2xl font-extrabold text-[#1C1B1B] leading-tight">Pilih Terapis & Slot Jadwal</h2>
+                    <p class="text-xs text-[#49454F] mt-0.5 flex items-center flex-wrap gap-1.5">
+                        <span>Estimasi durasi: <strong class="text-[#1C1B1B] font-bold">{{ intdiv($duration, 60) ? intdiv($duration, 60) . 'j ' : '' }}{{ $duration % 60 }}m</strong></span>
+                        <span class="text-gray-300 hidden xs:inline">·</span>
+                        <span>Tanggal: <strong class="text-[#1C1B1B] font-bold">{{ Carbon::parse($bookingDate)->locale('id')->isoFormat('D MMMM Y') }}</strong></span>
                     </p>
                 </div>
             </div>
+            <div class="self-start sm:self-auto shrink-0">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F6F3F2] border border-[#DCD9D9] text-[11px] font-semibold text-[#49454F]">
+                    <x-lucide-clock class="w-3.5 h-3.5 text-[#B76E79]" />
+                    <span>Jam Operasional: <strong class="text-[#1C1B1B]">11:00 – 19:00 WIB</strong></span>
+                </span>
+            </div>
         </div>
 
-        {{-- ──── Horizontal Date Picker + Quick Filter ──── --}}
-        <div class="border-t border-gray-100 bg-gray-50/50">
-            <div class="flex items-center gap-2 px-4 py-3">
-                {{-- Scrollable dates --}}
-                <div class="flex-1 overflow-x-auto scrollbar-hide">
-                    <div class="flex gap-2 min-w-max py-1">
+        {{-- ──── Horizontal Date Picker + Quick Filter (Touch & Mobile Friendly) ──── --}}
+        <div class="border-t border-[#DCD9D9]/60 bg-[#FBF9F8]">
+            <div class="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3">
+                {{-- Scrollable dates with touch momentum --}}
+                <div class="flex-1 overflow-x-auto scrollbar-hide py-1">
+                    <div class="flex gap-2 min-w-max">
                         @foreach($dateRange as $d)
                             <button
                                 type="button"
                                 onclick="window.location.href='{{ route('booking.index') }}?date={{ $d['value'] }}'"
-                                class="flex flex-col items-center justify-center w-[64px] h-[70px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none
+                                class="flex flex-col items-center justify-center w-[54px] sm:w-[64px] h-[64px] sm:h-[70px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none
                                     @if($d['active'])
-                                        bg-[#991b1b] text-white shadow-md shadow-[#991b1b]/30 scale-105 ring-2 ring-[#991b1b]/20
+                                        bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 scale-105 ring-2 ring-[#B76E79]/25
                                     @else
-                                        bg-white text-gray-700 hover:bg-gray-100 border border-gray-200/80 hover:border-gray-300
+                                        bg-white text-[#49454F] hover:bg-[#F6F3F2] border border-[#DCD9D9] hover:border-[#B76E79]/50
                                     @endif"
                             >
-                                <span class="text-[10px] font-bold uppercase tracking-wider {{ $d['active'] ? 'text-white/80' : 'text-gray-400' }}">{{ $d['day_short'] }}</span>
-                                <span class="text-lg font-extrabold leading-none mt-1">{{ $d['day_num'] }}</span>
-                                <span class="text-[10px] font-semibold mt-0.5 {{ $d['active'] ? 'text-white/70' : 'text-gray-400' }}">{{ $d['month'] }}</span>
+                                <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider {{ $d['active'] ? 'text-white/80' : 'text-[#79747E]' }}">{{ $d['day_short'] }}</span>
+                                <span class="text-base sm:text-lg font-extrabold leading-none mt-1">{{ $d['day_num'] }}</span>
+                                <span class="text-[9px] sm:text-[10px] font-semibold mt-0.5 {{ $d['active'] ? 'text-white/80' : 'text-[#79747E]' }}">{{ $d['month'] }}</span>
                             </button>
                         @endforeach
                     </div>
                 </div>
 
-                {{-- Quick filter dropdown/input --}}
-                <div class="flex items-center gap-1.5 shrink-0 ml-2">
+                {{-- Quick filter manual calendar picker --}}
+                <div class="flex items-center shrink-0">
                     <div class="relative group" title="Pilih tanggal manual">
                         <input type="date"
                                value="{{ $bookingDate }}"
                                min="{{ now()->addDay()->format('Y-m-d') }}"
                                max="{{ now()->addWeeks(4)->format('Y-m-d') }}"
-                               class="w-10 h-10 rounded-xl border border-gray-200 bg-white text-transparent cursor-pointer hover:border-[#991b1b]/40 transition opacity-0 absolute inset-0 z-10"
+                               class="w-10 h-10 rounded-2xl border border-[#DCD9D9] bg-white text-transparent cursor-pointer hover:border-[#B76E79] transition opacity-0 absolute inset-0 z-10"
                                onchange="window.location.href='{{ route('booking.index') }}?date=' + this.value">
-                        <div class="w-10 h-10 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-600 group-hover:text-[#991b1b] group-hover:border-[#991b1b]/40 shadow-sm transition">
+                        <div class="w-10 h-10 rounded-2xl border border-[#DCD9D9] bg-white flex items-center justify-center text-[#49454F] group-hover:text-[#B76E79] group-hover:border-[#B76E79] shadow-soft transition">
                             <x-lucide-calendar-search class="w-4 h-4" />
                         </div>
                     </div>
@@ -145,33 +153,33 @@
     {{-- ───────────────────── DAFTAR SELURUH TERAPIS ───────────────────── --}}
     <div class="space-y-4">
         <div class="flex items-center justify-between px-1">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-500">
+            <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#49454F]">
                 Pilih Terapis ({{ count($artistData) }} Tersedia)
             </h3>
-            <span class="text-xs text-gray-400">Klik kartu untuk membuka slot</span>
+            <span class="text-[11px] sm:text-xs text-[#79747E]">Klik kartu untuk membuka slot</span>
         </div>
 
         @foreach($artistData as $art)
-            <div class="rounded-3xl border transition-all duration-300 bg-white overflow-hidden shadow-sm"
+            <div class="rounded-3xl border transition-all duration-300 bg-white overflow-hidden shadow-soft"
                  :class="{
-                     'ring-2 ring-[#991b1b] border-[#991b1b] shadow-md': selectedArtistId === {{ $art['id'] }},
-                     'border-gray-200 hover:border-gray-300': selectedArtistId !== {{ $art['id'] }}
+                     'ring-2 ring-[#B76E79] border-[#B76E79] shadow-md': selectedArtistId === {{ $art['id'] }},
+                     'border-[#DCD9D9] hover:border-[#B76E79]/50': selectedArtistId !== {{ $art['id'] }}
                  }">
 
-                {{-- Artist Row / Card Header --}}
-                <div class="p-4 sm:p-5 cursor-pointer select-none transition-colors"
-                     :class="expandedArtistId === {{ $art['id'] }} ? 'bg-gray-50/70' : 'bg-white hover:bg-gray-50/40'"
+                {{-- Artist Row / Card Header (Responsive on Mobile) --}}
+                <div class="p-3.5 sm:p-5 cursor-pointer select-none transition-colors"
+                     :class="expandedArtistId === {{ $art['id'] }} ? 'bg-[#FBF9F8]' : 'bg-white hover:bg-[#FBF9F8]/60'"
                      @click="toggleArtist({{ $art['id'] }})">
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-start sm:items-center gap-3 sm:gap-4">
 
                         {{-- Foto Profile aspect-square rounded --}}
                         <div class="shrink-0 relative">
                             @if($art['photo'])
                                 <img src="{{ str_starts_with($art['photo'], 'data:') ? $art['photo'] : asset('storage/' . $art['photo']) }}"
                                      alt="{{ $art['name'] }}"
-                                     class="w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-2xl object-cover ring-2 ring-white shadow-sm">
+                                     class="w-14 h-14 sm:w-18 sm:h-18 aspect-square rounded-2xl object-cover ring-2 ring-white shadow-soft">
                             @else
-                                <div class="w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-2xl bg-gradient-to-br from-[#991b1b] to-[#b74545] flex items-center justify-center text-white font-extrabold text-xl sm:text-2xl ring-2 ring-white shadow-sm">
+                                <div class="w-14 h-14 sm:w-18 sm:h-18 aspect-square rounded-2xl bg-gradient-to-br from-[#B76E79] to-[#d3938d] flex items-center justify-center text-white font-serif font-extrabold text-lg sm:text-2xl ring-2 ring-white shadow-soft">
                                     {{ $art['initials'] }}
                                 </div>
                             @endif
@@ -179,8 +187,8 @@
                             {{-- Selected badge overlay --}}
                             <div x-show="selectedArtistId === {{ $art['id'] }}"
                                  x-cloak
-                                 class="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#991b1b] text-white flex items-center justify-center shadow-md ring-2 ring-white">
-                                <x-lucide-check class="w-3.5 h-3.5 stroke-[3]" />
+                                 class="absolute -top-1.5 -right-1.5 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#B76E79] text-white flex items-center justify-center shadow-md ring-2 ring-white">
+                                <x-lucide-check class="w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[3]" />
                             </div>
                         </div>
 
@@ -188,28 +196,28 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                                 <div>
-                                    <h4 class="font-serif text-base sm:text-lg font-bold text-gray-900 leading-tight truncate">
+                                    <h4 class="font-serif text-base sm:text-lg font-bold text-[#1C1B1B] leading-tight truncate">
                                         {{ $art['name'] }}
                                     </h4>
-                                    <p class="text-xs text-gray-500 mt-0.5 truncate">
+                                    <p class="text-xs text-[#49454F] mt-0.5 truncate">
                                         Nail Artist · {{ $art['specialty'] }}
                                     </p>
                                 </div>
 
                                 {{-- Rating --}}
-                                <div class="flex items-center gap-2 mt-1 sm:mt-0">
-                                    <div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-100 text-xs font-bold text-amber-700">
-                                        <x-lucide-star class="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                                <div class="flex items-center gap-1.5 mt-0.5 sm:mt-0">
+                                    <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200/60 text-[11px] font-bold text-amber-700">
+                                        <x-lucide-star class="w-3 h-3 text-amber-500 fill-amber-500" />
                                         <span>{{ $art['avg_rating'] }}</span>
                                     </div>
-                                    <span class="text-xs text-gray-400">({{ $art['review_count'] }} ulasan)</span>
+                                    <span class="text-[11px] text-[#79747E]">({{ $art['review_count'] }} ulasan)</span>
                                 </div>
                             </div>
 
-                            {{-- Tombol Status Ketersediaan --}}
-                            <div class="mt-3 flex items-center gap-2">
+                            {{-- Tombol Status Ketersediaan & Selected Tag --}}
+                            <div class="mt-2.5 flex flex-wrap items-center gap-2">
                                 @if($art['has_available'])
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#991b1b] text-white shadow-sm shadow-[#991b1b]/20">
+                                    <span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-bold bg-[#B76E79] text-white shadow-sm shadow-[#B76E79]/20 transition hover:bg-[#a35460]">
                                         <x-lucide-calendar-check class="w-3.5 h-3.5" />
                                         <span>{{ $art['available_count'] }} Slot Tersedia</span>
                                         <span class="inline-flex transition-transform duration-300" :class="expandedArtistId === {{ $art['id'] }} ? 'rotate-180' : ''">
@@ -217,7 +225,7 @@
                                         </span>
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 text-gray-500">
+                                    <span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-semibold bg-[#F6F3F2] text-[#49454F]">
                                         <x-lucide-calendar-x class="w-3.5 h-3.5" />
                                         <span>Tidak Ada Slot / Libur</span>
                                         <span class="inline-flex transition-transform duration-300" :class="expandedArtistId === {{ $art['id'] }} ? 'rotate-180' : ''">
@@ -226,8 +234,8 @@
                                     </span>
                                 @endif
 
-                                <span x-show="selectedArtistId === {{ $art['id'] }}" x-cloak class="text-xs font-extrabold text-[#991b1b] bg-[#991b1b]/10 px-2.5 py-1 rounded-lg">
-                                    Terapis Terpilih
+                                <span x-show="selectedArtistId === {{ $art['id'] }}" x-cloak class="text-[11px] font-bold text-[#B76E79] bg-[#F4D7D4]/40 border border-[#B76E79]/20 px-2.5 py-1 rounded-xl">
+                                    ✓ Terapis Terpilih
                                 </span>
                             </div>
                         </div>
@@ -244,72 +252,72 @@
                      x-transition:leave-start="opacity-100 translate-y-0"
                      x-transition:leave-end="opacity-0 -translate-y-2"
                      x-cloak>
-                    <div class="border-t border-gray-100 px-4 sm:px-6 py-5 bg-gray-50/60">
+                    <div class="border-t border-[#DCD9D9]/60 px-3 sm:px-6 py-4 sm:py-5 bg-[#FBF9F8]">
 
                         @if(empty($art['slots']))
-                            <div class="text-center py-8">
-                                <div class="w-12 h-12 mx-auto rounded-full bg-gray-100 flex items-center justify-center mb-2.5 text-gray-400">
-                                    <x-lucide-calendar-off class="w-6 h-6" />
+                            <div class="text-center py-6 sm:py-8">
+                                <div class="w-11 h-11 mx-auto rounded-2xl bg-[#F6F3F2] flex items-center justify-center mb-2 text-[#79747E]">
+                                    <x-lucide-calendar-off class="w-5 h-5" />
                                 </div>
-                                <p class="font-bold text-gray-700 text-sm">Tidak Ada Jadwal</p>
-                                <p class="text-xs text-gray-500 mt-1">Terapis libur atau jadwal belum diatur untuk tanggal ini.</p>
+                                <p class="font-bold text-[#1C1B1B] text-sm">Tidak Ada Jadwal</p>
+                                <p class="text-xs text-[#49454F] mt-0.5">Terapis libur atau jadwal belum diatur untuk tanggal ini.</p>
                             </div>
                         @else
-                            <div class="mb-3 flex items-center justify-between">
-                                <span class="text-xs font-bold text-gray-700">Pilih Jam Mulai:</span>
-                                <span class="text-xs text-gray-400">Durasi: {{ $duration }} menit</span>
+                            <div class="mb-3 flex items-center justify-between text-xs">
+                                <span class="font-bold text-[#1C1B1B]">Pilih Jam Mulai:</span>
+                                <span class="text-[#79747E]">Durasi: {{ $duration }} menit</span>
                             </div>
 
-                            {{-- Grid 4 kolom desktop, 2 kolom HP --}}
-                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+                            {{-- Grid 2 kolom di mobile, 3 di tablet, 4 di desktop --}}
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                                 @foreach($art['slots'] as $s)
                                     @if($s['available'])
                                         {{-- ✅ Slot Tersedia --}}
                                         <button type="button"
                                                 @click="selectSlot({{ $art['id'] }}, '{{ addslashes($art['name']) }}', '{{ $s['time'] }}')"
-                                                class="group relative block w-full text-left cursor-pointer rounded-2xl border-2 p-3 sm:p-3.5 transition-all duration-200 select-none"
+                                                class="group relative block w-full text-left cursor-pointer rounded-2xl border-2 p-2.5 sm:p-3.5 transition-all duration-200 select-none"
                                                 :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}')
-                                                    ? 'border-[#991b1b] bg-[#991b1b]/5 shadow-md shadow-[#991b1b]/10 scale-[1.02]'
-                                                    : 'border-gray-200 bg-white hover:border-[#991b1b]/40 hover:shadow-sm'">
+                                                    ? 'border-[#B76E79] bg-[#F4D7D4]/25 shadow-md shadow-[#B76E79]/15 scale-[1.02]'
+                                                    : 'border-[#DCD9D9] bg-white hover:border-[#B76E79]/60 hover:shadow-soft'">
 
                                             {{-- Top Status badge & Check Indicator --}}
-                                            <div class="flex items-center justify-between mb-1.5">
+                                            <div class="flex items-center justify-between mb-1">
                                                 <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all"
                                                      :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}')
-                                                        ? 'border-[#991b1b] bg-[#991b1b]'
-                                                        : 'border-gray-300 bg-white'">
+                                                        ? 'border-[#B76E79] bg-[#B76E79]'
+                                                        : 'border-[#DCD9D9] bg-white'">
                                                     <svg class="w-2.5 h-2.5 text-white transition"
                                                          :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'opacity-100' : 'opacity-0'"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </div>
-                                                <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                                                <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-1.5 py-0.5 rounded-md">
                                                     Tersedia
                                                 </span>
                                             </div>
 
                                             {{-- Time Range --}}
-                                            <div class="font-extrabold text-sm sm:text-base leading-tight transition-colors"
-                                                 :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'text-[#991b1b]' : 'text-gray-900 group-hover:text-[#991b1b]'">
+                                            <div class="font-extrabold text-xs sm:text-base leading-tight transition-colors"
+                                                 :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'text-[#B76E79]' : 'text-[#1C1B1B] group-hover:text-[#B76E79]'">
                                                 {{ $s['time'] }} – {{ $s['end_time'] }}
                                             </div>
 
-                                            {{-- Price in maroon --}}
-                                            <div class="mt-1.5 text-xs sm:text-sm font-bold text-[#991b1b]">
+                                            {{-- Price in Booknail primary color --}}
+                                            <div class="mt-1 text-xs sm:text-sm font-bold text-[#B76E79]">
                                                 Rp {{ number_format($totalPrice, 0, ',', '.') }}
                                             </div>
                                         </button>
                                     @else
                                         {{-- 🚫 Slot Terisi (Booked) --}}
-                                        <div class="rounded-2xl border-2 border-gray-100 bg-gray-100/80 p-3 sm:p-3.5 text-center opacity-60 cursor-not-allowed select-none">
+                                        <div class="rounded-2xl border border-[#DCD9D9]/80 bg-[#F6F3F2]/60 p-2.5 sm:p-3.5 text-center opacity-60 cursor-not-allowed select-none">
                                             <div class="flex justify-end mb-1">
-                                                <span class="text-[9px] font-bold uppercase tracking-wider text-gray-400 bg-gray-200 px-1.5 py-0.5 rounded-md">Terisi</span>
+                                                <span class="text-[9px] font-bold uppercase tracking-wider text-[#79747E] bg-gray-200/80 px-1.5 py-0.5 rounded-md">Terisi</span>
                                             </div>
-                                            <div class="font-extrabold text-sm sm:text-base text-gray-400 line-through decoration-gray-300">
+                                            <div class="font-bold text-xs sm:text-base text-[#79747E] line-through decoration-gray-400">
                                                 {{ $s['time'] }} – {{ $s['end_time'] }}
                                             </div>
-                                            <div class="mt-1 text-xs sm:text-sm font-bold text-gray-400 italic">
+                                            <div class="mt-1 text-[11px] sm:text-xs font-semibold text-[#79747E] italic">
                                                 Booked
                                             </div>
                                         </div>
@@ -326,7 +334,7 @@
     </div>
 
     {{-- ───────────────────── FORM SUBMIT & STATUS BAR ───────────────────── --}}
-    <form action="{{ route('booking.selectSlot') }}" method="POST" id="slotForm" class="space-y-4 pt-2">
+    <form action="{{ route('booking.selectSlot') }}" method="POST" id="slotForm" class="space-y-4 pt-1">
         @csrf
         <input type="hidden" name="booking_date" value="{{ $bookingDate }}">
         <input type="hidden" name="artist_id" :value="selectedArtistId || ''">
@@ -334,43 +342,43 @@
 
         {{-- Slot Selection Summary Bar --}}
         <div x-show="selectedArtistId && selectedSlot" x-cloak
-             class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-sm">
+             class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-soft">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
                     <x-lucide-check-circle-2 class="w-5 h-5 text-emerald-600" />
                 </div>
-                <div class="text-sm text-emerald-950">
+                <div class="text-xs sm:text-sm text-emerald-950">
                     <div>Terapis: <strong class="font-extrabold" x-text="selectedArtistName"></strong></div>
                     <div class="text-xs text-emerald-700 mt-0.5">
                         Jadwal: Jam <strong class="font-bold" x-text="selectedSlot"></strong> WIB · {{ Carbon::parse($bookingDate)->locale('id')->isoFormat('D MMMM Y') }}
                     </div>
                 </div>
             </div>
-            <div class="text-xs font-semibold text-emerald-700 shrink-0">
+            <div class="text-xs font-bold text-emerald-700 shrink-0 self-end sm:self-auto">
                 ✓ Siap diproses
             </div>
         </div>
 
         <div x-show="!selectedArtistId || !selectedSlot"
-             class="rounded-2xl border border-amber-200 bg-amber-50/70 px-4 py-3 flex items-center gap-2.5 text-xs text-amber-800">
+             class="rounded-2xl border border-amber-200 bg-amber-50/70 px-4 py-3 flex items-center gap-2.5 text-xs text-amber-900">
             <x-lucide-info class="w-4 h-4 text-amber-600 shrink-0" />
             <span>Pilih salah satu slot jam pada terapis di atas untuk melanjutkan ke step berikutnya.</span>
         </div>
 
-        {{-- Action Buttons --}}
-        <div class="flex flex-col sm:flex-row gap-3">
+        {{-- Action Buttons (Mobile-first layout) --}}
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
             <button type="submit"
                     :disabled="!selectedArtistId || !selectedSlot"
-                    :class="(!selectedArtistId || !selectedSlot) ? 'opacity-50 cursor-not-allowed bg-gray-400' : 'bg-[#991b1b] hover:bg-[#7f1717] shadow-lg shadow-[#991b1b]/20 hover:shadow-xl hover:shadow-[#991b1b]/30 hover:-translate-y-0.5'"
-                    class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-white text-base active:translate-y-0 transition-all duration-300">
-                <x-lucide-arrow-right class="w-5 h-5" />
+                    :class="(!selectedArtistId || !selectedSlot) ? 'opacity-50 cursor-not-allowed bg-stone-300 text-stone-500' : 'bg-[#B76E79] hover:bg-[#a35460] text-white shadow-lg shadow-[#B76E79]/25 hover:shadow-xl hover:shadow-[#B76E79]/35 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer'"
+                    class="order-1 sm:order-2 flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 min-h-[48px]">
                 <span>Simpan & Lanjut ke Step 3 (Desain)</span>
+                <x-lucide-arrow-right class="w-5 h-5" />
             </button>
 
             <a href="{{ route('booking.reset') }}"
-               class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-gray-600 border border-gray-200 bg-white hover:bg-gray-50 transition-all duration-200">
+               class="order-2 sm:order-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl font-bold text-xs sm:text-sm text-[#49454F] border border-[#DCD9D9] bg-white hover:bg-[#F6F3F2] transition-all duration-200 min-h-[48px]">
                 <x-lucide-rotate-ccw class="w-4 h-4" />
-                <span>Kembali Step 1</span>
+                <span>Pilih Ulang Layanan</span>
             </a>
         </div>
     </form>
