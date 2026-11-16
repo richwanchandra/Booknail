@@ -233,6 +233,11 @@ class BookingController extends Controller
                 'loyalty_discount' => $discount,
                 'status' => Booking::STATUS_PENDING,
                 'is_walk_in' => false,
+                'is_delayed' => false,
+                'delay_minutes' => 0,
+                'artist_confirmation_status' => 'pending',
+                'booking_source' => 'WEB_ONLINE',
+                'branch' => 'Citra Garden 6',
             ]);
 
             // Buat detail booking untuk setiap layanan yang dipilih

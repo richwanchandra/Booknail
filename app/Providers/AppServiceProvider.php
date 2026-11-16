@@ -37,23 +37,22 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
 
-            // Self-healing MySQL AUTO_INCREMENT if missing in production
+            // Self-healing MySQL schema (AUTO_INCREMENT & column defaults) if missing in production
             try {
                 if (\Illuminate\Support\Facades\DB::getDriverName() === 'mysql') {
-                    $hasAi = \Illuminate\Support\Facades\DB::selectOne("
-                        SELECT EXTRA FROM INFORMATION_SCHEMA.COLUMNS
-                        WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'bookings' AND COLUMN_NAME = 'id'
-                    ");
-                    if ($hasAi && !str_contains(strtolower($hasAi->EXTRA ?? ''), 'auto_increment')) {
-                        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
-                        \Illuminate\Support\Facades\DB::statement('ALTER TABLE `bookings` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;');
-                        \Illuminate\Support\Facades\DB::statement('ALTER TABLE `booking_details` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;');
-                        \Illuminate\Support\Facades\DB::statement('ALTER TABLE `payments` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;');
-                        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-                    }
+                    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `bookings` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `booking_details` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `payments` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `bookings` MODIFY `delay_minutes` INT NOT NULL DEFAULT 0;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `bookings` MODIFY `is_delayed` TINYINT(1) NOT NULL DEFAULT 0;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `artist_confirmation_status` VARCHAR(30) NOT NULL DEFAULT 'pending';"); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `booking_source` VARCHAR(30) NOT NULL DEFAULT 'WEB_ONLINE';"); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `branch` VARCHAR(50) NULL DEFAULT 'Citra Garden 6';"); } catch (\Throwable $e) {}
+                    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
                 }
             } catch (\Throwable $e) {
-                // Silently ignore if already altered or restricted
+                // Silently ignore if restricted
             }
         }
 

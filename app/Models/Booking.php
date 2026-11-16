@@ -16,6 +16,20 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Booking extends Model
 {
     use HasAutoIncrementFallback;
+
+    // Nilai default atribut saat model diinisialisasi
+    protected $attributes = [
+        'delay_minutes' => 0,
+        'is_delayed' => false,
+        'artist_confirmation_status' => 'pending',
+        'branch' => 'Citra Garden 6',
+        'booking_source' => 'WEB_ONLINE',
+        'is_walk_in' => false,
+        'status' => 'pending',
+        'loyalty_points_used' => 0,
+        'loyalty_discount' => 0,
+    ];
+
     // Kolom yang diizinkan untuk mass assignment
     protected $fillable = [
         'booking_code',               // Kode unik booking (format: BNyymmddXXX)
