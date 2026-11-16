@@ -49,6 +49,8 @@ class AppServiceProvider extends ServiceProvider
                     try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `artist_confirmation_status` VARCHAR(30) NOT NULL DEFAULT 'pending';"); } catch (\Throwable $e) {}
                     try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `booking_source` VARCHAR(30) NOT NULL DEFAULT 'WEB_ONLINE';"); } catch (\Throwable $e) {}
                     try { \Illuminate\Support\Facades\DB::statement("ALTER TABLE `bookings` MODIFY `branch` VARCHAR(50) NULL DEFAULT 'Citra Garden 6';"); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `users` MODIFY `loyalty_points` INT UNSIGNED NOT NULL DEFAULT 0;'); } catch (\Throwable $e) {}
+                    try { \Illuminate\Support\Facades\DB::statement('ALTER TABLE `users` MODIFY `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;'); } catch (\Throwable $e) {}
                     \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
                 }
             } catch (\Throwable $e) {

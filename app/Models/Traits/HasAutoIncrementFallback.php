@@ -38,6 +38,13 @@ trait HasAutoIncrementFallback
                     $model->setAttribute('branch', 'Citra Garden 6');
                 }
             }
+
+            // Pastikan loyalty_points pada model User tidak pernah null
+            if ($model instanceof \App\Models\User) {
+                if ($model->getAttribute('loyalty_points') === null) {
+                    $model->setAttribute('loyalty_points', 0);
+                }
+            }
         });
     }
 }
