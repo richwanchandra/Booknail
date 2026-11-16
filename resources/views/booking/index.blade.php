@@ -12,7 +12,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <x-fcm-scripts />
 </head>
-<body class="bg-white text-gray-800 antialiased min-h-screen flex flex-col">
+<body class="bg-white text-gray-800 antialiased min-h-screen flex flex-col overflow-x-hidden">
 
 <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-brand-100/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,9 +117,9 @@
 @endif
 
 <section class="pb-16 -mt-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0 max-w-full">
+        <div class="grid lg:grid-cols-3 gap-8 w-full min-w-0 max-w-full">
+            <div class="lg:col-span-2 space-y-8 w-full min-w-0 max-w-full">
 
                 @if($currentStep === 1)
                     <form action="{{ route('booking.storeStep1') }}" method="POST" id="step1Form">

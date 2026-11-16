@@ -7,9 +7,9 @@
     $bookingDate = $step1['booking_date'] ?? now()->addDay()->format('Y-m-d');
     $totalPrice = (int) ($step1['total_price'] ?? 0);
 
-    // Build 7-day date range starting tomorrow
+    // Build 14-day date range starting tomorrow for swiping
     $dateRange = [];
-    for ($i = 1; $i <= 7; $i++) {
+    for ($i = 1; $i <= 14; $i++) {
         $d = now()->addDays($i);
         $dateRange[] = [
             'value'     => $d->format('Y-m-d'),
@@ -79,10 +79,10 @@
         this.selectedArtistName = artistName;
         this.selectedSlot = time;
     }
-}" class="space-y-5">
+}" class="space-y-5 w-full min-w-0 max-w-full">
 
     {{-- ───────────────────────────── HEADER ───────────────────────────── --}}
-    <div class="bg-white rounded-3xl border border-[#DCD9D9]/80 overflow-hidden shadow-soft">
+    <div class="bg-white rounded-3xl border border-[#DCD9D9]/80 overflow-hidden shadow-soft w-full min-w-0 max-w-full">
 
         {{-- Title & Duration Info --}}
         <div class="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -107,19 +107,22 @@
             </div>
         </div>
 
-        {{-- ──── Horizontal Date Picker + Quick Filter (Touch & Mobile Friendly) ──── --}}
-        <div class="border-t border-[#DCD9D9]/60 bg-[#FBF9F8]">
-            <div class="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3">
-                {{-- Scrollable dates with touch momentum --}}
-                <div class="flex-1 overflow-x-auto scrollbar-hide py-1">
-                    <div class="flex gap-2 min-w-max">
+        {{-- ──── Horizontal Date Picker + Quick Filter (Touch & Mobile Friendly - Swipable) ──── --}}
+        <div class="border-t border-[#DCD9D9]/60 bg-[#FBF9F8] w-full min-w-0 overflow-hidden">
+            <div class="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 w-full min-w-0">
+                {{-- Scrollable dates with touch momentum (Bisa digeser) --}}
+                <div class="flex-1 min-w-0 overflow-x-auto scrollbar-hide py-1 touch-pan-x"
+                     x-data
+                     x-init="$nextTick(() => { const active = $el.querySelector('.date-pill-active'); if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); })"
+                     style="-webkit-overflow-scrolling: touch;">
+                    <div class="flex gap-2 min-w-max pr-1">
                         @foreach($dateRange as $d)
                             <button
                                 type="button"
                                 onclick="window.location.href='{{ route('booking.index') }}?date={{ $d['value'] }}'"
-                                class="flex flex-col items-center justify-center w-[54px] sm:w-[64px] h-[64px] sm:h-[70px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none
+                                class="flex flex-col items-center justify-center w-[50px] sm:w-[58px] h-[58px] sm:h-[66px] rounded-2xl text-center transition-all duration-200 shrink-0 select-none cursor-pointer
                                     @if($d['active'])
-                                        bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 scale-105 ring-2 ring-[#B76E79]/25
+                                        date-pill-active bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/30 ring-2 ring-[#B76E79]/25 scale-102
                                     @else
                                         bg-white text-[#49454F] hover:bg-[#F6F3F2] border border-[#DCD9D9] hover:border-[#B76E79]/50
                                     @endif"
@@ -151,7 +154,7 @@
     </div>
 
     {{-- ───────────────────── DAFTAR SELURUH TERAPIS ───────────────────── --}}
-    <div class="space-y-4">
+    <div class="space-y-4 w-full min-w-0 max-w-full">
         <div class="flex items-center justify-between px-1">
             <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#49454F]">
                 Pilih Terapis ({{ count($artistData) }} Tersedia)
@@ -160,7 +163,7 @@
         </div>
 
         @foreach($artistData as $art)
-            <div class="rounded-3xl border transition-all duration-300 bg-white overflow-hidden shadow-soft"
+            <div class="rounded-3xl border transition-all duration-300 bg-white overflow-hidden shadow-soft w-full min-w-0 max-w-full"
                  :class="{
                      'ring-2 ring-[#B76E79] border-[#B76E79] shadow-md': selectedArtistId === {{ $art['id'] }},
                      'border-[#DCD9D9] hover:border-[#B76E79]/50': selectedArtistId !== {{ $art['id'] }}
@@ -252,74 +255,53 @@
                      x-transition:leave-start="opacity-100 translate-y-0"
                      x-transition:leave-end="opacity-0 -translate-y-2"
                      x-cloak>
-                    <div class="border-t border-[#DCD9D9]/60 px-3 sm:px-6 py-4 sm:py-5 bg-[#FBF9F8]">
+                    <div class="border-t border-[#DCD9D9]/60 px-3 sm:px-5 py-3 sm:py-4 bg-[#FBF9F8] w-full min-w-0">
 
                         @if(empty($art['slots']))
-                            <div class="text-center py-6 sm:py-8">
-                                <div class="w-11 h-11 mx-auto rounded-2xl bg-[#F6F3F2] flex items-center justify-center mb-2 text-[#79747E]">
-                                    <x-lucide-calendar-off class="w-5 h-5" />
+                            <div class="text-center py-5 sm:py-7">
+                                <div class="w-10 h-10 mx-auto rounded-2xl bg-[#F6F3F2] flex items-center justify-center mb-1.5 text-[#79747E]">
+                                    <x-lucide-calendar-off class="w-4 h-4" />
                                 </div>
-                                <p class="font-bold text-[#1C1B1B] text-sm">Tidak Ada Jadwal</p>
-                                <p class="text-xs text-[#49454F] mt-0.5">Terapis libur atau jadwal belum diatur untuk tanggal ini.</p>
+                                <p class="font-bold text-[#1C1B1B] text-xs sm:text-sm">Tidak Ada Jadwal</p>
+                                <p class="text-[11px] text-[#49454F] mt-0.5">Terapis libur atau jadwal belum diatur untuk tanggal ini.</p>
                             </div>
                         @else
-                            <div class="mb-3 flex items-center justify-between text-xs">
+                            <div class="mb-2.5 flex items-center justify-between text-xs">
                                 <span class="font-bold text-[#1C1B1B]">Pilih Jam Mulai:</span>
                                 <span class="text-[#79747E]">Durasi: {{ $duration }} menit</span>
                             </div>
 
-                            {{-- Grid 2 kolom di mobile, 3 di tablet, 4 di desktop --}}
-                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+                            {{-- Grid 3 kolom di mobile (dipendekin & compact), 4 di tablet & desktop --}}
+                            <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-2.5 w-full min-w-0">
                                 @foreach($art['slots'] as $s)
                                     @if($s['available'])
-                                        {{-- ✅ Slot Tersedia --}}
+                                        {{-- ✅ Slot Tersedia (Compact Chip) --}}
                                         <button type="button"
                                                 @click="selectSlot({{ $art['id'] }}, '{{ addslashes($art['name']) }}', '{{ $s['time'] }}')"
-                                                class="group relative block w-full text-left cursor-pointer rounded-2xl border-2 p-2.5 sm:p-3.5 transition-all duration-200 select-none"
+                                                class="group relative flex flex-col items-center justify-center py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center transition-all duration-150 select-none cursor-pointer min-h-[46px]"
                                                 :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}')
-                                                    ? 'border-[#B76E79] bg-[#F4D7D4]/25 shadow-md shadow-[#B76E79]/15 scale-[1.02]'
-                                                    : 'border-[#DCD9D9] bg-white hover:border-[#B76E79]/60 hover:shadow-soft'">
+                                                    ? 'border-[#B76E79] bg-[#B76E79] text-white shadow-md shadow-[#B76E79]/25 ring-2 ring-[#B76E79]/20'
+                                                    : 'border-[#DCD9D9] bg-white text-[#1C1B1B] hover:border-[#B76E79] hover:bg-[#FBF9F8]'">
 
-                                            {{-- Top Status badge & Check Indicator --}}
-                                            <div class="flex items-center justify-between mb-1">
-                                                <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all"
-                                                     :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}')
-                                                        ? 'border-[#B76E79] bg-[#B76E79]'
-                                                        : 'border-[#DCD9D9] bg-white'">
-                                                    <svg class="w-2.5 h-2.5 text-white transition"
-                                                         :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'opacity-100' : 'opacity-0'"
-                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </div>
-                                                <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-1.5 py-0.5 rounded-md">
-                                                    Tersedia
-                                                </span>
-                                            </div>
+                                            <span class="font-extrabold text-xs sm:text-sm leading-tight"
+                                                  :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'text-white' : 'text-[#1C1B1B] group-hover:text-[#B76E79]'">
+                                                {{ $s['time'] }}
+                                            </span>
 
-                                            {{-- Time Range --}}
-                                            <div class="font-extrabold text-xs sm:text-base leading-tight transition-colors"
-                                                 :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'text-[#B76E79]' : 'text-[#1C1B1B] group-hover:text-[#B76E79]'">
-                                                {{ $s['time'] }} – {{ $s['end_time'] }}
-                                            </div>
-
-                                            {{-- Price in Booknail primary color --}}
-                                            <div class="mt-1 text-xs sm:text-sm font-bold text-[#B76E79]">
-                                                Rp {{ number_format($totalPrice, 0, ',', '.') }}
-                                            </div>
+                                            <span class="text-[10px] sm:text-[11px] font-medium leading-none mt-0.5"
+                                                  :class="(selectedArtistId === {{ $art['id'] }} && selectedSlot === '{{ $s['time'] }}') ? 'text-white/80' : 'text-[#79747E]'">
+                                                – {{ $s['end_time'] }}
+                                            </span>
                                         </button>
                                     @else
-                                        {{-- 🚫 Slot Terisi (Booked) --}}
-                                        <div class="rounded-2xl border border-[#DCD9D9]/80 bg-[#F6F3F2]/60 p-2.5 sm:p-3.5 text-center opacity-60 cursor-not-allowed select-none">
-                                            <div class="flex justify-end mb-1">
-                                                <span class="text-[9px] font-bold uppercase tracking-wider text-[#79747E] bg-gray-200/80 px-1.5 py-0.5 rounded-md">Terisi</span>
-                                            </div>
-                                            <div class="font-bold text-xs sm:text-base text-[#79747E] line-through decoration-gray-400">
-                                                {{ $s['time'] }} – {{ $s['end_time'] }}
-                                            </div>
-                                            <div class="mt-1 text-[11px] sm:text-xs font-semibold text-[#79747E] italic">
-                                                Booked
-                                            </div>
+                                        {{-- 🚫 Slot Terisi (Booked - Compact) --}}
+                                        <div class="flex flex-col items-center justify-center py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border border-[#DCD9D9]/60 bg-[#F6F3F2]/70 text-center opacity-60 cursor-not-allowed select-none min-h-[46px]">
+                                            <span class="font-bold text-xs sm:text-sm text-[#79747E] line-through leading-tight">
+                                                {{ $s['time'] }}
+                                            </span>
+                                            <span class="text-[9px] sm:text-[10px] font-semibold text-[#79747E] mt-0.5 uppercase tracking-wider">
+                                                Terisi
+                                            </span>
                                         </div>
                                     @endif
                                 @endforeach
@@ -334,7 +316,7 @@
     </div>
 
     {{-- ───────────────────── FORM SUBMIT & STATUS BAR ───────────────────── --}}
-    <form action="{{ route('booking.selectSlot') }}" method="POST" id="slotForm" class="space-y-4 pt-1">
+    <form action="{{ route('booking.selectSlot') }}" method="POST" id="slotForm" class="space-y-4 pt-1 w-full min-w-0">
         @csrf
         <input type="hidden" name="booking_date" value="{{ $bookingDate }}">
         <input type="hidden" name="artist_id" :value="selectedArtistId || ''">
