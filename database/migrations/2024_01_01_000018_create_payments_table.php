@@ -19,7 +19,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id(); // Primary key auto-increment
             $table->foreignId('booking_id')->constrained()->cascadeOnDelete(); // Foreign key ke tabel bookings, hapus pembayaran jika booking dihapus
-            $table->string('payment_type', 20)->default('dp')->after('booking_id'); // Tipe pembayaran: 'dp' (uang muka) atau 'full' (pelunasan), default DP
+            $table->string('payment_type', 20)->default('dp'); // Tipe pembayaran: 'dp' (uang muka) atau 'full' (pelunasan), default DP
             $table->string('proof_file'); // Path file bukti transfer yang diunggah pelanggan
             $table->decimal('amount', 12, 0); // Jumlah pembayaran dalam Rupiah
             // Status verifikasi pembayaran: pending (menunggu) → verified (terverifikasi) / rejected (ditolak)

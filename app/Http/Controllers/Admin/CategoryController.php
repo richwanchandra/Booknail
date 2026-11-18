@@ -26,6 +26,7 @@ class CategoryController extends Controller
         $v = $request->validate([
             'name' => 'required|string|max:100|unique:categories,name',
             'slug' => 'nullable|string|max:120|unique:categories,slug',
+            'icon' => 'nullable|string|max:50',
             'description' => 'nullable|string|max:1000',
             'is_active' => 'nullable|boolean',
         ]);
@@ -33,7 +34,7 @@ class CategoryController extends Controller
         Category::create([
             'name' => $v['name'],
             'slug' => $v['slug'] ?? Str::slug($v['name']),
-            'description' => $v['description'] ?? null,
+            'icon' => $v['icon'] ?? 'sparkles',
             'is_active' => (bool) ($v['is_active'] ?? true),
         ]);
 
@@ -50,6 +51,7 @@ class CategoryController extends Controller
         $v = $request->validate([
             'name' => 'required|string|max:100|unique:categories,name,'.$category->id,
             'slug' => 'nullable|string|max:120|unique:categories,slug,'.$category->id,
+            'icon' => 'nullable|string|max:50',
             'description' => 'nullable|string|max:1000',
             'is_active' => 'nullable|boolean',
         ]);
@@ -57,7 +59,7 @@ class CategoryController extends Controller
         $category->update([
             'name' => $v['name'],
             'slug' => $v['slug'] ?? Str::slug($v['name']),
-            'description' => $v['description'] ?? null,
+            'icon' => $v['icon'] ?? $category->icon ?? 'sparkles',
             'is_active' => (bool) ($v['is_active'] ?? $request->has('is_active')),
         ]);
 
